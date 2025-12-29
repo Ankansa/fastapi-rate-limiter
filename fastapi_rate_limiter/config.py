@@ -17,3 +17,7 @@ class RateLimitConfig:
     }
 
     LIMIT_PER_USER: bool = True       # Use authenticated user ID when available
+
+    # Redis settings
+    REDIS_URL: Optional[str] = "redis://localhost:6379/0"  # None = use in-memory
+    REDIS_PREFIX: str = "rate_limiter"
