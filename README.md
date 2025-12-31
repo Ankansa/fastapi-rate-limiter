@@ -15,4 +15,4 @@ A simple yet powerful token-bucket based rate limiting middleware for FastAPI.
 ## Installation
 
 ```bash
-pip install git+https://github.com/yourusername/fastapi-rate-limiter.git
+pip install git+https://github.com/Ankansa/fastapi-rate-limiter.git

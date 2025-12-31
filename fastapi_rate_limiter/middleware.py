@@ -99,12 +99,18 @@ class RateLimiterMiddleware(BaseHTTPMiddleware):
     def _get_client_key(self, request: Request) -> str:
         if self.config.LIMIT_PER_USER:
             user = getattr(request.state, "user", None)
+            print("User from state in rate limiter:", user)
             if user:
                 user_id = None
                 if isinstance(user, dict):
                     user_id = user.get("id") or user.get("sub")
+                    print("User ID in rate limiter if isinstance dict :", user_id)
                 elif hasattr(user, "id"):
                     user_id = getattr(user, "id")
+                    print("User ID in rate limiter if attribute (id) object :", getattr(user, "id"))
                 if user_id:
+                    print("User ID in rate limiter:", user_id)
                     return f"user:{user_id}"
-        return f"ip:{get_client_ip(request)}"
+        print("Falling back to IP-based rate limiting")
+        client_key = f"ip:{get_client_ip(request)}"
+        return client_key
