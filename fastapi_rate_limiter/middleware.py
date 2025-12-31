@@ -98,6 +98,14 @@ class RateLimiterMiddleware(BaseHTTPMiddleware):
 
     def _get_client_key(self, request: Request) -> str:
         if self.config.LIMIT_PER_USER:
+    
+            token = "anonymous"
+            
+            auth_header = request.headers.get("authorization")
+            if auth_header:
+                
+                token = auth_header.split(" ", 1)[1]
+   
             user = getattr(request.state, "user", None)
             if user:
                 user_id = None
@@ -107,4 +115,8 @@ class RateLimiterMiddleware(BaseHTTPMiddleware):
                     user_id = getattr(user, "id")
                 if user_id:
                     return f"user:{user_id}"
+<<<<<<< HEAD
+        return f"ip:{get_client_ip(request)},token:{token}"
+=======
         return f"ip:{get_client_ip(request)}"
+>>>>>>> ae4c0c005022533cee7a43edb8fb565e843f44e2
