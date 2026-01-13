@@ -115,8 +115,5 @@ class RateLimiterMiddleware(BaseHTTPMiddleware):
                     user_id = getattr(user, "id")
                 if user_id:
                     return f"user:{user_id}"
-<<<<<<< HEAD
         return f"ip:{get_client_ip(request)},token:{token}"
-=======
-        return f"ip:{get_client_ip(request)}"
->>>>>>> ae4c0c005022533cee7a43edb8fb565e843f44e2
+
